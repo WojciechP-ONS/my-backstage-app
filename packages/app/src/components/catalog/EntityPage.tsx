@@ -58,6 +58,22 @@ import {
 import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
 import { ReportIssue } from '@backstage/plugin-techdocs-module-addons-contrib';
 
+import { EntityJiraOverviewCard, isJiraAvailable } from '@roadiehq/backstage-plugin-jira';
+
+import {
+  EntityGithubInsightsContent,
+  EntityGithubInsightsLanguagesCard,
+  EntityGithubInsightsReadmeCard,
+  EntityGithubInsightsReleasesCard,
+  isGithubInsightsAvailable,
+  } from '@roadiehq/backstage-plugin-github-insights';
+    
+import { EntityTeamPullRequestsCard } from '@backstage/plugin-github-pull-requests-board';
+
+import { EntityGithubPullRequestsContent } from '@roadiehq/backstage-plugin-github-pull-requests';
+
+
+
 const techdocsContent = (
   <EntityTechdocsContent>
     <TechDocsAddons>
@@ -66,11 +82,16 @@ const techdocsContent = (
   </EntityTechdocsContent>
 );
 
+import {
+  EntityCircleCIContent,
+  isCircleCIAvailable,
+} from '@backstage/plugin-circleci';
+
 const cicdContent = (
   // This is an example of how you can implement your company's logic in entity page.
   // You can for example enforce that all components of type 'service' should use GitHubActions
   <EntitySwitch>
-    <EntitySwitch.Case if={isGithubActionsAvailable}>
+    <EntitySwitch.Case if={isCircleCIAvailable}>
       <EntityGithubActionsContent />
     </EntitySwitch.Case>
 
@@ -137,6 +158,31 @@ const overviewContent = (
     <Grid item md={8} xs={12}>
       <EntityHasSubcomponentsCard variant="gridItem" />
     </Grid>
+
+    <Grid container spacing={3} alignItems="stretch">
+    <EntitySwitch>
+      <EntitySwitch.Case if={isJiraAvailable}>
+        <Grid item md={6}>
+          <EntityJiraOverviewCard />
+        </Grid>
+      </EntitySwitch.Case>
+    </EntitySwitch>
+    </Grid>
+
+    <Grid container spacing={3} alignItems="stretch">
+    <EntitySwitch>
+        <EntitySwitch.Case if={e => Boolean(isGithubInsightsAvailable(e))}>
+          <Grid item md={6}>
+            <EntityGithubInsightsLanguagesCard />
+            <EntityGithubInsightsReleasesCard />
+          </Grid>
+          <Grid item md={6}>
+            <EntityGithubInsightsReadmeCard maxHeight={350} />
+          </Grid>
+        </EntitySwitch.Case>
+      </EntitySwitch>
+    </Grid>
+
   </Grid>
 );
 
@@ -175,7 +221,20 @@ const serviceEntityPage = (
     <EntityLayout.Route path="/docs" title="Docs">
       {techdocsContent}
     </EntityLayout.Route>
+
+    <EntityLayout.Route 
+      path="/code-insights"
+      title="Code Insights">
+      <EntityGithubInsightsContent />
+    </EntityLayout.Route>
+
+    <EntityLayout.Route path="/pull-requests" title="Pull Requests">
+      <EntityGithubPullRequestsContent />
+    </EntityLayout.Route>
+
   </EntityLayout>
+
+  
 );
 
 const websiteEntityPage = (
@@ -302,6 +361,9 @@ const groupPage = (
         </Grid>
         <Grid item xs={12}>
           <EntityMembersListCard />
+        </Grid>
+        <Grid item xs={12}>
+          <EntityTeamPullRequestsCard />
         </Grid>
       </Grid>
     </EntityLayout.Route>

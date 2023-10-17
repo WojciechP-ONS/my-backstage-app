@@ -51,5 +51,12 @@
     "*.{json,md}": [
       "prettier --write"
     ]
+  },
+  "dependencies": {
+    "@backstage/plugin-circleci": "^0.3.24",
+    "@backstage/theme": "^0.4.2",
+    "@k-phoen/backstage-plugin-announcements-backend": "^0.2.0",
+    "@roadiehq/backstage-plugin-github-insights": "^2.3.21",
+    "@roadiehq/backstage-plugin-github-pull-requests": "^2.5.18"
   }
 }

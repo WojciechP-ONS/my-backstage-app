@@ -5,7 +5,7 @@ import ExtensionIcon from '@material-ui/icons/Extension';
 import MapIcon from '@material-ui/icons/MyLocation';
 import LibraryBooks from '@material-ui/icons/LibraryBooks';
 import CreateComponentIcon from '@material-ui/icons/AddCircleOutline';
-import LogoFull from './LogoFull';
+// import LogoFull from './LogoFull';
 import LogoIcon from './LogoIcon';
 import {
   Settings as SidebarSettings,
@@ -26,6 +26,15 @@ import {
 } from '@backstage/core-components';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
+import InternalToolIcon from '/Users/wojckechprzybylski/my-backstage-app/packages/app/src/Announcement.icon.svg';
+import MyCustomLogoFull from '/Users/wojckechprzybylski/my-backstage-app/packages/app/src/logo.png';
+
+const LogoFull = () => {
+  return <img src={MyCustomLogoFull} />;
+};
+
+
+
 
 const useSidebarLogoStyles = makeStyles({
   root: {
@@ -69,6 +78,7 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
         <SidebarItem icon={ExtensionIcon} to="api-docs" text="APIs" />
         <SidebarItem icon={LibraryBooks} to="docs" text="Docs" />
         <SidebarItem icon={CreateComponentIcon} to="create" text="Create..." />
+        <SidebarItem icon={InternalToolIcon} to="announcements" text="Announcements" />;
         {/* End global nav */}
         <SidebarDivider />
         <SidebarScrollWrapper>

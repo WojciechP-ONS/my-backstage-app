@@ -1,0 +1,10 @@
+# users.yaml
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: WojciechPONS
+spec:
+  # Define user-specific information here
+  displayName: Wojciech Przybylski
+  email: wojciech.przybylski@ext.ons.gov.uk
+  # Add more properties as needed

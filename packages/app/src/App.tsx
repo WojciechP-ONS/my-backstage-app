@@ -34,8 +34,107 @@ import { CatalogGraphPage } from '@backstage/plugin-catalog-graph';
 import { RequirePermission } from '@backstage/plugin-permission-react';
 import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/alpha';
 
+import { githubAuthApiRef } from '@backstage/core-plugin-api';
+import { SignInPage } from '@backstage/core-components';
+
+import { ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import LightIcon from '@material-ui/icons/WbSunny';
+import {
+  createTheme,
+  genPageTheme,
+  lightTheme,
+  shapes,
+} from '@backstage/theme';
+import { AnnouncementsPage } from '@k-phoen/backstage-plugin-announcements';
+
+
+
+const myTheme = createTheme({
+  palette: {
+    ...lightTheme.palette,
+    primary: {
+      main: '#343b58',
+    },
+    secondary: {
+      main: '#565a6e',
+    },
+    error: {
+      main: '#8c4351',
+    },
+    warning: {
+      main: '#8f5e15',
+    },
+    info: {
+      main: '#34548a',
+    },
+    success: {
+      main: '#485e30',
+    },
+    background: {
+      default: '#d5d6db',
+      paper: '#d5d6db',
+    },
+    banner: {
+      info: '#34548a',
+      error: '#8c4351',
+      text: '#343b58',
+      link: '#565a6e',
+    },
+    errorBackground: '#8c4351',
+    warningBackground: '#8f5e15',
+    infoBackground: '#343b58',
+    navigation: {
+      background: '#003d5a',
+      indicator: '#8f5e15',
+      color: '#d5d6db',
+      selectedColor: '#ffffff',
+    },
+  },
+  defaultPageTheme: 'home',
+  fontFamily: 'Arial',
+  /* below drives the header colors */
+  pageTheme: {
+    home: genPageTheme({ colors: ['#a6be2c', '#343b58'], shape: shapes.wave }),
+    documentation: genPageTheme({
+      colors: ['#a6be2c', '#343b58'],
+      shape: shapes.wave2,
+    }),
+    tool: genPageTheme({ colors: ['#a6be2c', '#343b58'], shape: shapes.round }),
+    service: genPageTheme({
+      colors: ['#a6be2c', '#343b58'],
+      shape: shapes.wave,
+    }),
+    website: genPageTheme({
+      colors: ['#a6be2c', '#343b58'],
+      shape: shapes.wave,
+    }),
+    library: genPageTheme({
+      colors: ['#a6be2c', '#343b58'],
+      shape: shapes.wave,
+    }),
+    other: genPageTheme({ colors: ['#a6be2c', '#343b58'], shape: shapes.wave }),
+    app: genPageTheme({ colors: ['#a6be2c', '#343b58'], shape: shapes.wave }),
+    apis: genPageTheme({ colors: ['#a6be2c', '#343b58'], shape: shapes.wave }),
+  },
+});
+
 const app = createApp({
   apis,
+  // components: {
+  //   SignInPage: props => (
+  //     <SignInPage
+  //       {...props}
+  //       auto
+  //       provider={{
+  //         id: 'github-auth-provider',
+  //         title: 'GitHub',
+  //         message: 'Sign in using GitHub',
+  //         apiRef: githubAuthApiRef,
+  //       }}
+  //     />
+  //   ),
+  // },
   bindRoutes({ bind }) {
     bind(catalogPlugin.externalRoutes, {
       createComponent: scaffolderPlugin.routes.root,
@@ -53,7 +152,19 @@ const app = createApp({
       catalogIndex: catalogPlugin.routes.catalogIndex,
     });
   },
-});
+  themes: [{
+    id: 'my-theme',
+    title: 'My Custom Theme',
+    variant: 'light',
+    icon: <LightIcon />,
+    Provider: ({ children }) => (
+      <ThemeProvider theme={myTheme}>
+        <CssBaseline>{children}</CssBaseline>
+      </ThemeProvider>
+    ),
+  }]
+})
+
 
 const routes = (
   <FlatRoutes>
@@ -93,6 +204,8 @@ const routes = (
     </Route>
     <Route path="/settings" element={<UserSettingsPage />} />
     <Route path="/catalog-graph" element={<CatalogGraphPage />} />
+    <Route path="/announcements" element={<AnnouncementsPage />} />
+
   </FlatRoutes>
 );
 
