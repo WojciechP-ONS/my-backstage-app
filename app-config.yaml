@@ -3,7 +3,7 @@ app:
   baseUrl: http://localhost:3000
 
 organization:
-  name: My Company
+  name: ONS Backstage App
 
 backend:
   # Used for enabling authentication, secret is shared by all backend plugins
@@ -76,7 +76,7 @@ proxy:
   '/jira/api':
     target: 'https://akira.atlassian.net'
     headers:
-      Authorization: ${JIRA_TOKEN}
+      Authorization: Basic YWtpcmFqbGFuZUBnbWFpbC5jb206QVRBVFQzeEZmR0YwLWJQTERfdThwdEJvTndlVlpDSEliNGdPaXUxMkpGTkwxbGVxYzVLY3hkWHNWRlhUSDVHTFRhaFhzdzI2U1JFRGowaXZIVVZBOEpTT3Z1WWlMY21PSUJiM1pYbFlvZmRVN0FxWDlmSzhadzk4dk1hWHpkNV9fTXRoMENWbmJLeHp2Y2dOR2JqME03WTZzdVI3aUd2TVVQdlprZjhCS0xvYlpuZzNnQ0hzZ2NJPTZGNTI3RjVB
       Accept: 'application/json'
       Content-Type: 'application/json'
       X-Atlassian-Token: 'nocheck'
@@ -120,7 +120,7 @@ catalog:
     #   target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/all.yaml
 
     # Uncomment these lines to add an example org
-    - type: url
-      target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/acme-corp.yaml
-      rules:
-        - allow: [User, Group]
+    # - type: url
+    #   target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/acme-corp.yaml
+    #   rules:
+    #     - allow: [User, Group]

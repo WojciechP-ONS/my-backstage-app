@@ -121,20 +121,20 @@ const myTheme = createTheme({
 
 const app = createApp({
   apis,
-  // components: {
-  //   SignInPage: props => (
-  //     <SignInPage
-  //       {...props}
-  //       auto
-  //       provider={{
-  //         id: 'github-auth-provider',
-  //         title: 'GitHub',
-  //         message: 'Sign in using GitHub',
-  //         apiRef: githubAuthApiRef,
-  //       }}
-  //     />
-  //   ),
-  // },
+  components: {
+    SignInPage: props => (
+      <SignInPage
+        {...props}
+        auto
+        provider={{
+          id: 'github-auth-provider',
+          title: 'GitHub',
+          message: 'Sign in using GitHub',
+          apiRef: githubAuthApiRef,
+        }}
+      />
+    ),
+  },
   bindRoutes({ bind }) {
     bind(catalogPlugin.externalRoutes, {
       createComponent: scaffolderPlugin.routes.root,
