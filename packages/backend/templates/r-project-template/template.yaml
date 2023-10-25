@@ -2,8 +2,8 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: website-project
-  title: Website project template
+  name: r-project-template
+  title: R project template
   description: "Set up a basic 'hello world' project"
   tags:
     - r
@@ -48,8 +48,6 @@ spec:
       input:
         url: ./content
         copyWithoutRender:
-          # - .github/workflows/*
-          - static_website_builder/*
         values:
           name: ${{ parameters.name }}
           destination: ${{ parameters.repoUrl | parseRepoUrl }}
@@ -64,11 +62,11 @@ spec:
         description: ${{ parameters.description }}
         repoUrl: ${{ parameters.repoUrl }}
 
-    - id: getBuildFolder
-      name: Getting the build folder from GitHub Actions (this might take a while!)
-      action: ons:github:getBuildArtifact
-      input:
-        repoUrl: ${{ parameters.repoUrl }}
+    # - id: getBuildFolder
+    #   name: Getting the build folder from GitHub Actions (this might take a while!)
+    #   action: ons:github:getBuildArtifact
+    #   input:
+    #     repoUrl: ${{ parameters.repoUrl }}
 
     - id: refresh
       name: Updating catalog entities

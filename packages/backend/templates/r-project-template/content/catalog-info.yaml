@@ -1,7 +1,7 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: r-website-template
+  name: R project template
   description: An r project template built for Backstage.
   annotations:
     github.com/project-slug: ${{values.destination.owner + "/" + values.destination.repo}}
