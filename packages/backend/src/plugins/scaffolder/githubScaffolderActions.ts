@@ -10,6 +10,7 @@ const yaml = require('js-yaml');
 const fs = require('fs');
 const errors = require('@backstage/errors');
 const integration = require('@backstage/integration');
+const AdmZip = require("adm-zip");
 
 type GetRepoContentResponseDataFile = components["schemas"]["content-file"]
 
