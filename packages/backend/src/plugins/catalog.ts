@@ -5,7 +5,14 @@ import { PluginEnvironment } from '../types';
 
 import { GithubEntityProvider, GithubOrgEntityProvider } from '@backstage/plugin-catalog-backend-module-github';
 
-
+export class GitHubManager {
+  static githubEntityProviders : GithubEntityProvider[];
+  static githubOrgEntityProvider : GithubOrgEntityProvider;
+  static capture(githubEntityProviders: GithubEntityProvider[], githubOrgEntityProvider: GithubOrgEntityProvider) {
+    GitHubManager.githubEntityProviders = githubEntityProviders;
+    GitHubManager.githubOrgEntityProvider = githubOrgEntityProvider
+  }
+}
 
 export default async function createPlugin(
   env: PluginEnvironment,

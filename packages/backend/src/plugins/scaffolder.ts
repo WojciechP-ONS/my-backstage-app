@@ -4,7 +4,16 @@ import { Router } from 'express';
 import type { PluginEnvironment } from '../types';
 import { ScmIntegrations } from '@backstage/integration';
 import { createNewAction } from './newaction';
+import { DefaultGithubCredentialsProvider } from '@backstage/integration';
 
+import { 
+  createCreateMkdocsAction, 
+  createCreateRulesetAction, 
+  createEnableSecretScanningAction, 
+  createGetBuildArtifactAction, 
+  createRunGithubProvidersAction, 
+  createUpdateMkdocsAction 
+} from './scaffolder/githubScaffolderActions';
 
 export default async function createPlugin(
   env: PluginEnvironment,
@@ -13,16 +22,30 @@ export default async function createPlugin(
     discoveryApi: env.discovery,
   });
 
-const integrations = ScmIntegrations.fromConfig(env.config);
+  const integrations = ScmIntegrations.fromConfig(env.config);
+  const githubCredentialsProvider = DefaultGithubCredentialsProvider.fromIntegrations(integrations);
 
-const builtInActions = createBuiltinActions({
-  integrations,
-  catalogClient,
-  config: env.config,
-  reader: env.reader,
-});
+  const builtInActions = createBuiltinActions({
+    integrations,
+    catalogClient,
+    config: env.config,
+    reader: env.reader,
+  });
+
+  const customActions = [
+
+    // GitHub
+    createUpdateMkdocsAction({integrations, githubCredentialsProvider}),
+    createRunGithubProvidersAction(),
+    createCreateMkdocsAction({integrations, githubCredentialsProvider}),
+    createGetBuildArtifactAction({integrations, githubCredentialsProvider}),
+    createCreateRulesetAction({integrations, githubCredentialsProvider}),
+    createEnableSecretScanningAction({integrations, githubCredentialsProvider}),
+  ];
+
 
 const actions = [
+  ...customActions,
   ...builtInActions,
   createNewAction(),
 ]
