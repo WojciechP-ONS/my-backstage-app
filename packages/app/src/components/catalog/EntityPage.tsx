@@ -72,6 +72,7 @@ import { EntityTeamPullRequestsCard } from '@backstage/plugin-github-pull-reques
 
 import { EntityGithubPullRequestsContent } from '@roadiehq/backstage-plugin-github-pull-requests';
 
+import { EntitySecurityInsightsContent } from '@roadiehq/backstage-plugin-security-insights';
 
 
 const techdocsContent = (
@@ -230,6 +231,12 @@ const serviceEntityPage = (
 
     <EntityLayout.Route path="/pull-requests" title="Pull Requests">
       <EntityGithubPullRequestsContent />
+    </EntityLayout.Route>
+
+    <EntityLayout.Route
+      path="/security-insights"
+      title="Security Insights">
+      <EntitySecurityInsightsContent />
     </EntityLayout.Route>
 
   </EntityLayout>

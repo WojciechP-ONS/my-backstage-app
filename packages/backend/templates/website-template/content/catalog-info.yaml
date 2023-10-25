@@ -1,0 +1,19 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: static-website-template
+  description: A website template built by Backstage.
+  annotations:
+    github.com/project-slug: ${{values.destination.owner + "/" + values.destination.repo}}
+    backstage.io/techdocs-ref: dir:.
+  links: 
+    - title: Website
+      url: http://${{ parameters.bucket }}.s3-website-us-east-1.amazonaws.com/
+      icon: search
+    - title: Bucket
+      url: https://s3.console.aws.amazon.com/s3/buckets/${{ parameters.bucket }}
+      icon: dashboard
+spec:
+  type: service
+  lifecycle: experimental
+  owner: ${{values.owner | dump}}

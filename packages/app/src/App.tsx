@@ -44,6 +44,7 @@ import {
   createTheme,
   genPageTheme,
   lightTheme,
+  darkTheme,
   shapes,
 } from '@backstage/theme';
 import { AnnouncementsPage } from '@k-phoen/backstage-plugin-announcements';
@@ -73,7 +74,7 @@ const myTheme = createTheme({
     },
     background: {
       default: '#d5d6db',
-      paper: '#d5d6db',
+      paper: '#d0d1db',
     },
     banner: {
       info: '#34548a',
@@ -86,7 +87,7 @@ const myTheme = createTheme({
     infoBackground: '#343b58',
     navigation: {
       background: '#003d5a',
-      indicator: '#8f5e15',
+      indicator: '#a6be2c',
       color: '#d5d6db',
       selectedColor: '#ffffff',
     },
@@ -100,7 +101,7 @@ const myTheme = createTheme({
       colors: ['#a6be2c', '#343b58'],
       shape: shapes.wave2,
     }),
-    tool: genPageTheme({ colors: ['#a6be2c', '#343b58'], shape: shapes.round }),
+    tool: genPageTheme({colors: ['#a6be2c', '#343b58'], shape: shapes.round }),
     service: genPageTheme({
       colors: ['#a6be2c', '#343b58'],
       shape: shapes.wave,

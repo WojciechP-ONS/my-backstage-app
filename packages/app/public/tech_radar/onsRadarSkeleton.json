@@ -1,0 +1,793 @@
+{
+    "title": "Title of your Tech radar",
+    "quadrants": [
+        {
+            "id": "1",
+            "name": "Languages"
+        },
+        {
+            "id": "2",
+            "name": "Frameworks"
+        },
+        {
+            "id": "3",
+            "name": "CI/CD"
+        },
+        {
+            "id": "4",
+            "name": "Infrastructure"
+        }
+    ],
+    "rings": [
+        {
+            "id": "adopt",
+            "name": "ADOPT",
+            "color": "#93c47d"
+        },
+        {
+            "id": "trial",
+            "name": "TRIAL",
+            "color": "#93d2c2"
+        },
+        {
+            "id": "assess",
+            "name": "ASSESS",
+            "color": "#fbdb84"
+        },
+        {
+            "id": "hold",
+            "name": "HOLD",
+            "color": "#efafa9"
+        }
+    ],
+    "entries": [
+        {
+            "id": "javascript",
+            "title": "Javascript",
+            "description": "Languages",
+            "key": "javascript",
+            "url": "#",
+            "quadrant": "1",
+            "timeline": [
+                {
+                    "moved": -1,
+                    "ringId": "assess",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+                    "title": "Javascript"
+                }
+            ]
+        },
+        {
+            "id": "python",
+            "title": "Python",
+            "description": "Languages",
+            "key": "python",
+            "url": "#",
+            "quadrant": "1",
+            "timeline": [
+                {
+                    "moved": 0,
+                    "ringId": "adopt",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "https://www.python.org/",
+                    "title": "Python"
+                }
+            ]
+        },
+        {
+            "id": "c_sharp",
+            "title": "C#",
+            "description": "Languages",
+            "key": "c_sharp",
+            "url": "#",
+            "quadrant": "1",
+            "timeline": [
+                {
+                    "moved": 1,
+                    "ringId": "trial",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "https://learn.microsoft.com/en-us/dotnet/csharp/",
+                    "title": "C#"
+                }
+            ]
+        },
+        {
+            "id": "vb6",
+            "title": "VB6",
+            "description": "Languages",
+            "key": "vb6",
+            "url": "#",
+            "quadrant": "1",
+            "timeline": [
+                {
+                    "moved": -1,
+                    "ringId": "hold",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "hhttps://learn.microsoft.com/en-us/previous-versions/visualstudio/visual-basic-6/visual-basic-6.0-documentation",
+                    "title": "VB6"
+                }
+            ]
+        },
+        {
+            "id": "typescript",
+            "title": "Typescript",
+            "description": "Languages",
+            "key": "typescript",
+            "url": "#",
+            "quadrant": "1",
+            "timeline": [
+                {
+                    "moved": 1,
+                    "ringId": "adopt",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "https://www.typescriptlang.org/",
+                    "title": "VB6"
+                }
+            ]
+        },
+        {
+            "id": "java",
+            "title": "Java",
+            "description": "Languages",
+            "key": "java",
+            "url": "#",
+            "quadrant": "1",
+            "timeline": [
+                {
+                    "moved": 0,
+                    "ringId": "adopt",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "https://www.java.com/en/",
+                    "title": "Java"
+                }
+            ]        
+        },
+        {
+            "id": "sas",
+            "title": "SAS",
+            "description": "Languages",
+            "key": "sas",
+            "url": "#",
+            "quadrant": "1",
+            "timeline": [
+                {
+                    "moved": 0,
+                    "ringId": "assess",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "https://www.sas.com/en_gb/training/courses/sas-programming.html",
+                    "title": "SAS"
+                }
+            ] 
+        },
+        {
+            "id": "scala",
+            "title": "Scala",
+            "description": "Languages",
+            "key": "scala",
+            "url": "#",
+            "quadrant": "1",
+            "timeline": [
+                {
+                    "moved": 1,
+                    "ringId": "trial",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "https://www.scala-lang.org/",
+                    "title": "Scala"
+                }
+            ] 
+        },
+        {
+            "id": "go",
+            "title": "Go",
+            "description": "Languages",
+            "key": "go",
+            "url": "#",
+            "quadrant": "1",
+            "timeline": [
+                {
+                    "moved": -1,
+                    "ringId": "assess",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "https://go.dev/",
+                    "title": "Go"
+                }
+            ] 
+        },
+        {
+            "id": "groovy",
+            "title": "Groovy",
+            "description": "Languages",
+            "key": "groovy",
+            "url": "#",
+            "quadrant": "1",
+            "timeline": [
+                {
+                    "moved": 0,
+                    "ringId": "hold",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "https://groovy-lang.org/",
+                    "title": "Groovy"
+                }
+            ] 
+        },
+        {
+            "id": "cpp",
+            "title": "C++",
+            "description": "Languages",
+            "key": "cpp",
+            "url": "#",
+            "quadrant": "1",
+            "timeline": [
+                {
+                    "moved": 0,
+                    "ringId": "trial",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "https://learn.microsoft.com/en-us/cpp/cpp/?view=msvc-170",
+                    "title": "C++"
+                }
+            ] 
+        },
+        {
+            "id": "dotnet",
+            "title": ".NET API",
+            "description": "Language_Frameworks",
+            "key": "dotnet",
+            "url": "#",
+            "quadrant": "2",
+            "timeline": [
+                {
+                    "moved": -1,
+                    "ringId": "assess",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "https://dotnet.microsoft.com/en-us/",
+                    "title": ".NET"
+                }
+            ] 
+        },
+        {
+            "id": "react",
+            "title": "React",
+            "description": "Language_Frameworks",
+            "key": "react",
+            "url": "#",
+            "quadrant": "2",
+            "timeline": [
+                {
+                    "moved": 0,
+                    "ringId": "adopt",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "https://react.dev/",
+                    "title": "React"
+                }
+            ] 
+        },
+        {
+            "id": "nodejs",
+            "title": "NodeJS",
+            "description": "Language_Frameworks",
+            "key": "nodejs",
+            "url": "#",
+            "quadrant": "2",
+            "timeline": [
+                {
+                    "moved": 0,
+                    "ringId": "adopt",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "https://nodejs.org/en",
+                    "title": "NodeJS"
+                }
+            ] 
+        },
+        {
+            "id": "flask",
+            "title": "Python Flask",
+            "description": "Language_Frameworks",
+            "key": "flask",
+            "url": "#",
+            "quadrant": "2",
+            "timeline": [
+                {
+                    "moved": 1,
+                    "ringId": "adopt",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "https://flask.palletsprojects.com/en/2.3.x/",
+                    "title": "Flask"
+                }
+            ] 
+        },
+        {
+            "id": "spring",
+            "title": "Spring",
+            "description": "Language_Frameworks",
+            "key": "spring",
+            "url": "#",
+            "quadrant": "2",
+            "timeline": [
+                {
+                    "moved": -1,
+                    "ringId": "hold",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "https://spring.io/projects/spring-framework",
+                    "title": "Spring"
+                }
+            ] 
+        },
+        {
+            "id": "selenium",
+            "title": "Selenium",
+            "description": "Testing_Frameworks",
+            "key": "selenium",
+            "url": "#",
+            "quadrant": "2",
+            "timeline": [
+                {
+                    "moved": 0,
+                    "ringId": "adopt",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "https://www.selenium.dev/",
+                    "title": "Selenium"
+                }
+            ] 
+        },
+        {
+            "id": "webdriver",
+            "title": "webdriver.io",
+            "description": "Testing_Frameworks",
+            "key": "webdriver",
+            "url": "#",
+            "quadrant": "2",
+            "timeline": [
+                {
+                    "moved": -1,
+                    "ringId": "assess",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "https://webdriver.io/",
+                    "title": "Webdriver.io"
+                }
+            ] 
+        },
+        {
+            "id": "cypress",
+            "title": "Cypress",
+            "description": "Testing_Frameworks",
+            "key": "cypress",
+            "url": "#",
+            "quadrant": "2",
+            "timeline": [
+                {
+                    "moved": 0,
+                    "ringId": "trial",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "https://www.cypress.io/",
+                    "title": "Cypress"
+                }
+            ] 
+        },
+        {
+            "id": "jest",
+            "title": "Jest",
+            "description": "Testing_Frameworks",
+            "key": "jest",
+            "url": "#",
+            "quadrant": "2",
+            "timeline": [
+                {
+                    "moved": 0,
+                    "ringId": "assess",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "https://jestjs.io/",
+                    "title": "Jest"
+                }
+            ] 
+        },
+        {
+            "id": "jmeter",
+            "title": "JMeter",
+            "description": "Testing_Frameworks",
+            "key": "jmeter",
+            "url": "#",
+            "quadrant": "2",
+            "timeline": [
+                {
+                    "moved": -1,
+                    "ringId": "hold",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "https://jmeter.apache.org/",
+                    "title": "JMeter"
+                }
+            ] 
+        },
+        {
+            "id": "concourse",
+            "title": "Concourse",
+            "description": "CICD",
+            "key": "concourse",
+            "url": "#",
+            "quadrant": "3",
+            "timeline": [
+                {
+                    "moved": 0,
+                    "ringId": "adopt",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "https://concourse-ci.org/",
+                    "title": "Concourse"
+                }
+            ] 
+        },
+        {
+            "id": "azure_devops",
+            "title": "Azure DevOps",
+            "description": "CICD",
+            "key": "azure_devops",
+            "url": "#",
+            "quadrant": "3",
+            "timeline": [
+                {
+                    "moved": 0,
+                    "ringId": "trial",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "https://azure.microsoft.com/en-gb/products/devops",
+                    "title": "Azure DevOps"
+                }
+            ] 
+        },
+        {
+            "id": "jenkins",
+            "title": "Jenkins",
+            "description": "CICD",
+            "key": "jenkins",
+            "url": "#",
+            "quadrant": "3",
+            "timeline": [
+                {
+                    "moved": -1,
+                    "ringId": "hold",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "https://www.jenkins.io/",
+                    "title": "Jenkins"
+                }
+            ] 
+        },
+        {
+            "id": "spinnaker",
+            "title": "Spinnaker",
+            "description": "CICD",
+            "key": "spinnaker",
+            "url": "#",
+            "quadrant": "3",
+            "timeline": [
+                {
+                    "moved": 0,
+                    "ringId": "assess",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "https://spinnaker.io/",
+                    "title": "Spinnaker"
+                }
+            ] 
+        },
+        {
+            "id": "gcp_cloud_run",
+            "title": "GCP Cloud Run",
+            "description": "CICD",
+            "key": "gcp_cloud_run",
+            "url": "#",
+            "quadrant": "3",
+            "timeline": [
+                {
+                    "moved": 0,
+                    "ringId": "assess",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "https://cloud.google.com/run",
+                    "title": "GCP Cloud Run"
+                }
+            ] 
+        },
+        {
+            "id": "redis",
+            "title": "Redis",
+            "description": "Datastores",
+            "key": "redis",
+            "url": "#",
+            "quadrant": "4",
+            "timeline": [
+                {
+                    "moved": 0,
+                    "ringId": "assess",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "https://redis.io/",
+                    "title": "Redis"
+                }
+            ] 
+        },
+        {
+            "id": "gcp_datastore",
+            "title": "GCP Datastore",
+            "description": "Datastores",
+            "key": "gcp_datastore",
+            "url": "#",
+            "quadrant": "4",
+            "timeline": [
+                {
+                    "moved": 0,
+                    "ringId": "assess",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "https://cloud.google.com/datastore",
+                    "title": "GCP Datastore"
+                }
+            ] 
+        },
+        {
+            "id": "postgres",
+            "title": "Postgres",
+            "description": "Datastores",
+            "key": "postgres",
+            "url": "#",
+            "quadrant": "4",
+            "timeline": [
+                {
+                    "moved": 1,
+                    "ringId": "adopt",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "https://www.postgresql.org/",
+                    "title": "PostgreSQL"
+                }
+            ] 
+        },
+        {
+            "id": "dynamodb",
+            "title": "DynamoDB",
+            "description": "Datastores",
+            "key": "dynamodb",
+            "url": "#",
+            "quadrant": "4",
+            "timeline": [
+                {
+                    "moved": 1,
+                    "ringId": "adopt",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "https://aws.amazon.com/dynamodb/",
+                    "title": "DynamoDB"
+                }
+            ] 
+        },
+        {
+            "id": "oracle",
+            "title": "Oracle",
+            "description": "Datastores",
+            "key": "oracle",
+            "url": "#",
+            "quadrant": "4",
+            "timeline": [
+                {
+                    "moved": 0,
+                    "ringId": "adopt",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "https://www.oracle.com/uk/database/",
+                    "title": "Oracle Database"
+                }
+            ] 
+        },
+        {
+            "id": "aws_fargate",
+            "title": "AWS Fargate",
+            "description": "Cloud_Services",
+            "key": "aws_fargate",
+            "url": "#",
+            "quadrant": "4",
+            "timeline": [
+                {
+                    "moved": 0,
+                    "ringId": "adopt",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "https://aws.amazon.com/fargate/",
+                    "title": "AWS Fargate"
+                }
+            ] 
+        },
+        {
+            "id": "gcp_cloud_functions",
+            "title": "GCP Cloud Functions",
+            "description": "Cloud_Services",
+            "key": "gcp_cloud_functions",
+            "url": "#",
+            "quadrant": "4",
+            "timeline": [
+                {
+                    "moved": 1,
+                    "ringId": "trial",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "https://cloud.google.com/functions",
+                    "title": "GCP Cloud Functions"
+                }
+            ] 
+        },
+        {
+            "id": "docker",
+            "title": "Docker",
+            "description": "Containers",
+            "key": "docker",
+            "url": "#",
+            "quadrant": "4",
+            "timeline": [
+                {
+                    "moved": 0,
+                    "ringId": "adopt",
+                    "date": "2022-02-08",
+                    "description": "[Reasoning for placement]"
+                }
+            ],
+            "links": [
+                {
+                    "url": "https://www.docker.com/",
+                    "title": "Docker"
+                }
+            ] 
+        }
+    ]
+}

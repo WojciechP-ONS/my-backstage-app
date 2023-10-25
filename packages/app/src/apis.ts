@@ -9,6 +9,9 @@ import {
   createApiFactory,
 } from '@backstage/core-plugin-api';
 
+import { OnsRadar } from './tech_radar/onsRadarClient';
+import { techRadarApiRef } from '@backstage/plugin-tech-radar';
+
 export const apis: AnyApiFactory[] = [
   createApiFactory({
     api: scmIntegrationsApiRef,
@@ -16,4 +19,6 @@ export const apis: AnyApiFactory[] = [
     factory: ({ configApi }) => ScmIntegrationsApi.fromConfig(configApi),
   }),
   ScmAuth.createDefaultApiFactory(),
+  createApiFactory(techRadarApiRef, new OnsRadar()),
+
 ];

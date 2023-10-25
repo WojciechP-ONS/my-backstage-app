@@ -1,0 +1,76 @@
+
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: website-project
+  title: Website project template
+  description: "Set up a basic 'hello world' project"
+  tags:
+    - r
+
+spec:
+  owner: WojciechPONS
+  type: service  
+  parameters:
+    - title: Name the project
+      required:
+        - name
+      properties:
+        name:
+          title: Project name
+          type: string
+          description: A human-readable name for the project.
+        owner:
+          title: Owner
+          type: string
+          description: Owner of the component.
+          ui:field: OwnerPicker
+          ui:options:
+            allowedKinds:
+              - Group
+    - title: Name the repo to store the source in (or choose an existing empty one).
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Repository Location
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
+########################################################
+
+  steps:
+    - id: template
+      name: Templating website content from filesystem
+      action: fetch:template
+      input:
+        url: ./content
+        copyWithoutRender:
+          # - .github/workflows/*
+          - static_website_builder/*
+        values:
+          name: ${{ parameters.name }}
+          destination: ${{ parameters.repoUrl | parseRepoUrl }}
+          owner: ${{ parameters.owner }}
+
+    - id: publish
+      name: Publishing to GitHub
+      action: publish:github
+      input:
+        allowedHosts:
+          - github.com
+        description: ${{ parameters.description }}
+        repoUrl: ${{ parameters.repoUrl }}
+
+    - id: getBuildFolder
+      name: Getting the build folder from GitHub Actions (this might take a while!)
+      action: ons:github:getBuildArtifact
+      input:
+        repoUrl: ${{ parameters.repoUrl }}
+
+    - id: refresh
+      name: Updating catalog entities
+      action: ons:github:runProviders
+
