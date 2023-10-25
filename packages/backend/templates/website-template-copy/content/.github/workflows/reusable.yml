@@ -1,0 +1,54 @@
+name: Build and Deploy
+on: [push]
+jobs:
+    build:
+
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                python-version: ["3.10"]
+        
+        steps:
+            - name: Check out repository code
+              uses: actions/checkout@v3
+            - name: Set up Python ${{ matrix.python-version }}
+              uses: actions/setup-python@v4
+              with:
+                python-version: ${{ matrix.python-version }}
+            - name: Install Poetry
+              run: curl -sSL https://install.python-poetry.org | python3 -
+            - name: Install the packages using poetry and create a virtual environment
+              run: poetry install --sync
+            - name: Check if project.toml file and poetry.lock file are in sync
+              run: poetry check
+            - name: Activate poetry environment
+              run: |
+                source $(poetry env info --path)/bin/activate
+                pwd
+            - name: Code formatter
+              run: |
+                source $(poetry env info --path)/bin/activate
+                black --check --diff static_website_builder
+            - name: Linting
+              run: |
+                source $(poetry env info --path)/bin/activate
+                pylint static_website_builder
+                flake8 static_website_builder
+            - name: Security scanner
+              run: |
+                source $(poetry env info --path)/bin/activate
+                bandit -r static_website_builder
+            - name: Freeze flask
+              run: |
+               source $(poetry env info --path)/bin/activate
+               echo "Installing the ONS design system"
+                ./get_design_system.sh
+                echo "Freezing flask"
+                python freeze.py
+            - name: Upload files
+              uses: actions/upload-artifact@v3
+              with:
+                name: build
+                path: build
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

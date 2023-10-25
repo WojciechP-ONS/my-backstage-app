@@ -32,6 +32,11 @@
     - allow: [Template]
 
 - type: file
+  target: ./templates/r-website-template/template.yaml
+  rules:
+    - allow: [Template]
+
+- type: file
   target: ./templates/docs-template/template.yaml
   rules:
     - allow: [Template]
@@ -63,5 +68,10 @@
 
 - type: file
   target: ./templates/website-template/template.yaml
+  rules:
+    - allow: [Template]
+
+- type: file
+  target: ./templates/website-template-copy/template.yaml
   rules:
     - allow: [Template]
