@@ -2,7 +2,7 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: r-project-template
+  name: R-project-template
   title: R project template
   description: "Set up a basic 'hello world' project"
   tags:
@@ -47,7 +47,6 @@ spec:
       action: fetch:template
       input:
         url: ./content
-        copyWithoutRender:
         values:
           name: ${{ parameters.name }}
           destination: ${{ parameters.repoUrl | parseRepoUrl }}

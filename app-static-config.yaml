@@ -32,7 +32,7 @@
     - allow: [Template]
 
 - type: file
-  target: ./templates/r-website-template/template.yaml
+  target: ./templates/r-project-template/template.yaml
   rules:
     - allow: [Template]
 
