@@ -11,7 +11,7 @@ metadata:
 ############################################################
 
 spec:
-  owner: user:WojciechPONS
+  owner: WojciechPONS
   type: service
   parameters:
     - title: Name of the project
