@@ -7,23 +7,29 @@ metadata:
   tags:
     - r
     - spp
-spec:
-  owner: user:WojciechPONS
-  type: service
 
 ############################################################
 
+spec:
+  owner: WojciechPONS
+  type: service
   parameters:
-    - title: Describe the project
+    - title: Name of the project
       required:
+        - displayName
         - name
         - owner
       properties:
-        name:
-          title: Name
+        displayName:
+          title: Display name
           type: string
-          description: The unique name of the component in the catalog. No spaces!
+          description: The human-readable name of the method.
           ui:autofocus: true
+          pattern: '^[a-zA-Z0-9_]+$'
+        description:
+          title: Description
+          type: string
+          description: A quick description of what this method is about.
         owner:
           title: Owner
           type: string
@@ -32,11 +38,7 @@ spec:
           ui:options:
             allowedKinds:
               - Group
-        description:
-          title: Description
-          type: string
-          description: Briefly describe the project.
-    - title: Choose a location
+    - title: Name the repo to create (or choose an existing empty one).
       required:
         - repoUrl
       properties:
@@ -45,25 +47,18 @@ spec:
           type: string
           ui:field: RepoUrlPicker
           ui:options:
-            catalogFilter:
-              kind: Group
             allowedHosts:
               - github.com
-    - title: Documentation
-      properties:
-        shouldTemplateDocs:
-          title: Generate TechDocs skeleton?
-          type: boolean
 
-########################################################
+############################################################
 
   steps:
-    - id: fetch
-      if: ${{ parameters.shouldTemplateDocs }}
-      name: Template Docs Skeleton
+
+    - id: template
+      name: Templating project
       action: fetch:template
       input:
-        url: ./skeleton
+        url: ./content
         values:
           name: ${{ parameters.name }}
           description: ${{ parameters.description }}
@@ -71,26 +66,37 @@ spec:
           owner: ${{ parameters.owner }}
 
     - id: publish
-      name: Publish
+      name: Publishing to GitHub
       action: publish:github
       input:
-        allowedHosts: ['github.com']
-        description: This is ${{ parameters.name }}
+        allowedHosts:
+          - github.com
+        description: ${{ parameters.description }}
         repoUrl: ${{ parameters.repoUrl }}
 
-    - id: register
-      name: Register
-      action: catalog:register
+    - id: branchProtect
+      name: Enabling branch protection and disallowing force pushes to main
+      action: ons:github:createRuleset
       input:
-        repoContentsUrl: ${{ steps['publish'].output.repoContentsUrl }}
-        catalogInfoPath: '/catalog-info.yaml'
+        repoUrl: ${{ parameters.repoUrl }}
 
-########################################################
+    - id: secretScanning
+      name: Enabling secret scanning
+      action: ons:github:enableSecretScanning
+      input:
+        repoUrl: ${{ parameters.repoUrl }}
+
+    # Using the "catalog:register" action can result in an orphaned repo when the underlying repo is eventually deleted,
+    # since it has a location independent of the entity providers. Instead, we rely on the providers to discover the entity
+    # (sacrificing the "open in catalog" button).
+    - id: refresh
+      name: Updating catalog entities
+      action: ons:github:runProviders
 
   output:
     links:
       - title: Repository
-        url: ${{ steps['publish'].output.remoteUrl }}
+        url: ${{ steps.publish.output.remoteUrl }}
       - title: Open in catalog
         icon: catalog
-        entityRef: ${{ steps['register'].output.entityRef }}
+        entityRef: ${{ steps.register.output.entityRef }}
