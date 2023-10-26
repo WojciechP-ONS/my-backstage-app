@@ -7,19 +7,29 @@ metadata:
   description: "Set up a basic 'hello world' project"
   tags:
     - r
+    - spp
+
+############################################################
 
 spec:
-  owner: WojciechPONS
-  type: service  
+  owner: user:WojciechPONS
+  type: service
   parameters:
-    - title: Name the project
+    - title: Name of the project
       required:
+        - displayName
         - name
+        - owner
       properties:
-        name:
-          title: Project name
+        displayName:
+          title: Display name
           type: string
-          description: A human-readable name for the project.
+          description: The human-readable name of the method.
+          ui:autofocus: true
+        description:
+          title: Description
+          type: string
+          description: A quick description of what this method is about.
         owner:
           title: Owner
           type: string
@@ -28,7 +38,7 @@ spec:
           ui:options:
             allowedKinds:
               - Group
-    - title: Name the repo to store the source in (or choose an existing empty one).
+    - title: Name the repo to create (or choose an existing empty one).
       required:
         - repoUrl
       properties:
@@ -39,16 +49,20 @@ spec:
           ui:options:
             allowedHosts:
               - github.com
-########################################################
+
+############################################################
 
   steps:
+
     - id: template
-      name: Templating website content from filesystem
+      name: Templating project skeleton
       action: fetch:template
       input:
         url: ./content
         values:
           name: ${{ parameters.name }}
+          displayName: ${{ parameters.displayName }}
+          description: ${{ parameters.description }}
           destination: ${{ parameters.repoUrl | parseRepoUrl }}
           owner: ${{ parameters.owner }}
 
@@ -61,13 +75,29 @@ spec:
         description: ${{ parameters.description }}
         repoUrl: ${{ parameters.repoUrl }}
 
-    # - id: getBuildFolder
-    #   name: Getting the build folder from GitHub Actions (this might take a while!)
-    #   action: ons:github:getBuildArtifact
-    #   input:
-    #     repoUrl: ${{ parameters.repoUrl }}
+    - id: branchProtect
+      name: Enabling branch protection and disallowing force pushes to main
+      action: ons:github:createRuleset
+      input:
+        repoUrl: ${{ parameters.repoUrl }}
 
+    - id: secretScanning
+      name: Enabling secret scanning
+      action: ons:github:enableSecretScanning
+      input:
+        repoUrl: ${{ parameters.repoUrl }}
+
+    # Using the "catalog:register" action can result in an orphaned repo when the underlying repo is eventually deleted,
+    # since it has a location independent of the entity providers. Instead, we rely on the providers to discover the entity
+    # (sacrificing the "open in catalog" button).
     - id: refresh
       name: Updating catalog entities
       action: ons:github:runProviders
 
+  output:
+    links:
+      - title: Repository
+        url: ${{ steps.publish.output.remoteUrl }}
+      - title: Open in catalog
+        icon: catalog
+        entityRef: ${{ steps.register.output.entityRef }}
