@@ -24,7 +24,6 @@ spec:
           type: string
           description: The unique name of the component in the catalog. No spaces!
           ui:autofocus: true
-          pattern: '^[a-zA-Z0-9-_]+$'
         owner:
           title: Owner
           type: string
