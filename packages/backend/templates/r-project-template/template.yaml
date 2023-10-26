@@ -25,11 +25,6 @@ spec:
           type: string
           description: The human-readable name of the method.
           ui:autofocus: true
-        name:
-          title: id
-          type: string
-          description: A unique alphanumeric name for the method, used to refer to it in code and in Backstage. Use snake_case or camelCase!
-          pattern: '^[a-zA-Z0-9_]+$'
         description:
           title: Description
           type: string
