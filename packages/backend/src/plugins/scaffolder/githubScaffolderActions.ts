@@ -131,16 +131,11 @@ export const createRunGithubProvidersAction = () => {
     description: "Immediately triggers the GitHub entity providers in order to refresh the catalog.",
     schema: {},
     async handler(ctx) {
-      try {
-          ctx.logger.info("Refreshing providers.");
-          await Promise.all(GitHubManager.githubEntityProviders.map(provider => provider.refresh(ctx.logger)));
-          ctx.logger.info("Reading organization data.");
-          await GitHubManager.githubOrgEntityProvider.read();
-      } catch (error) {
-          ctx.logger.error(`Error occurred: ${error.message}`);
-          // Handle the error appropriately, e.g., log it, return an error response, etc.
-      }
-    }
+      ctx.logger.info("Refreshing providers.");
+      await Promise.all(GitHubManager.githubEntityProviders.map(provider => provider.refresh(ctx.logger)));
+      ctx.logger.info("Reading organization data.");
+      await GitHubManager.githubOrgEntityProvider.read();
+  }
   });
 }
 
