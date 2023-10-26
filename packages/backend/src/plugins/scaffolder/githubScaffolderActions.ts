@@ -133,7 +133,11 @@ export const createRunGithubProvidersAction = () => {
     async handler(ctx) {
       try {
           ctx.logger.info("Refreshing providers.");
+          if (GitHubManager.githubEntityProviders) {
           await Promise.all(GitHubManager.githubEntityProviders.map(provider => provider.refresh(ctx.logger)));
+        } else {
+          ctx.logger.error('GitHub entity providers array is undefined or null.');
+        }
           ctx.logger.info("Reading organization data.");
           await GitHubManager.githubOrgEntityProvider.read();
       } catch (error) {
