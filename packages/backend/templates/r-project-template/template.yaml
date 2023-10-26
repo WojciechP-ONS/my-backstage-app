@@ -20,7 +20,7 @@ spec:
         - name
         - owner
       properties:
-        displayName:
+        name:
           title: Display name
           type: string
           description: The human-readable name of the method.
