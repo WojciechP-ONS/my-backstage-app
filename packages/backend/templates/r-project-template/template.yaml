@@ -16,7 +16,6 @@ spec:
   parameters:
     - title: Name of the project
       required:
-        - displayName
         - name
         - owner
       properties:
