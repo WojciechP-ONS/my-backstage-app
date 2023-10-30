@@ -13,6 +13,8 @@ const integration = require('@backstage/integration');
 
 type GetRepoContentResponseDataFile = components["schemas"]["content-file"]
 
+
+
 export const createUpdateMkdocsAction = (options: { integrations: ScmIntegrations; githubCredentialsProvider: DefaultGithubCredentialsProvider;}) => {
     const { integrations, githubCredentialsProvider } = options;
     return createTemplateAction({
@@ -133,11 +135,7 @@ export const createRunGithubProvidersAction = () => {
     async handler(ctx) {
       try {
           ctx.logger.info("Refreshing providers.");
-          if (GitHubManager.githubEntityProviders) {
           await Promise.all(GitHubManager.githubEntityProviders.map(provider => provider.refresh(ctx.logger)));
-        } else {
-          ctx.logger.error('GitHub entity providers array is undefined or null.');
-        }
           ctx.logger.info("Reading organization data.");
           await GitHubManager.githubOrgEntityProvider.read();
       } catch (error) {
@@ -595,7 +593,7 @@ async function getOctokitOptions(options: { integrations: any; credentialsProvid
     previews: ["nebula-preview"]
   };
 }
-const parseRepoUrl = (repoUrl: any, integrations: { byHost: (arg0: string) => any; }) => {
+export const parseRepoUrl = (repoUrl: any, integrations: { byHost: (arg0: string) => any; }) => {
     var _a, _b, _c, _d, _e;
     let parsed;
     try {

@@ -15,6 +15,8 @@ import {
   createUpdateMkdocsAction 
 } from './scaffolder/githubScaffolderActions';
 
+import { createGithubTemplateRepoCreateAction } from './scaffolder/github_templates/githubTemplateRepoCreate';
+
 export default async function createPlugin(
   env: PluginEnvironment,
 ): Promise<Router> {
@@ -35,6 +37,7 @@ export default async function createPlugin(
   const customActions = [
 
     // GitHub
+    createGithubTemplateRepoCreateAction({integrations, githubCredentialsProvider}),
     createUpdateMkdocsAction({integrations, githubCredentialsProvider}),
     createRunGithubProvidersAction(),
     createCreateMkdocsAction({integrations, githubCredentialsProvider}),

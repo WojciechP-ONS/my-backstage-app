@@ -53,25 +53,20 @@ spec:
 
   steps:
 
-    - id: template
-      name: Templating project
-      action: fetch:template
-      input:
-        url: ./content
-        values:
-          name: ${{ parameters.name }}
-          description: ${{ parameters.description }}
-          destination: ${{ parameters.repoUrl | parseRepoUrl }}
-          owner: ${{ parameters.owner }}
+    - action: github:templaterepo:create
+      id: github-templaterepo-create
+      name: Github Template-repo Create
+        input:
+          repoUrl: ${{ parameters.repoUrl}}
+          templateOwner: ${{ parameters.owner}}
+          templateRepo: https://github.com/backstage-dummy-org/Project-Test/tree/master # path to your template repo
 
     - id: publish
-      name: Publishing to GitHub
+      name: Publish
       action: publish:github
-      input:
-        allowedHosts:
-          - github.com
-        description: ${{ parameters.description }}
-        repoUrl: ${{ parameters.repoUrl }}
+        input:
+          repoUrl: ${{ parameters.repoUrl}}
+          description: 'this is a template repo'
 
     - id: branchProtect
       name: Enabling branch protection and disallowing force pushes to main
