@@ -1,2 +1,0 @@
-# ${{values.displayName}}
-${{values.description}}

@@ -1,3 +1,0 @@
-# ${{values.displayName}}
-
-Documentation!

@@ -52,7 +52,6 @@ spec:
 ############################################################
 
   steps:
-
     - action: github:templaterepo:create
       id: github-templaterepo-create
       name: Github Template-repo Create
@@ -60,19 +59,19 @@ spec:
           repoUrl: ${{ parameters.repoUrl}}
           templateOwner: ${{ parameters.owner}}
           templateRepo: https://github.com/backstage-dummy-org/Project-Test/tree/master # path to your template repo
-
     - id: publish
       name: Publish
       action: publish:github
         input:
           repoUrl: ${{ parameters.repoUrl}}
           description: 'this is a template repo'
+          protectDefaultBranch: true  
 
-    - id: branchProtect
-      name: Enabling branch protection and disallowing force pushes to main
-      action: ons:github:createRuleset
-      input:
-        repoUrl: ${{ parameters.repoUrl }}
+    # - id: branchProtect
+    #   name: Enabling branch protection and disallowing force pushes to main
+    #   action: ons:github:createRuleset
+    #   input:
+    #     repoUrl: ${{ parameters.repoUrl }}
 
     - id: secretScanning
       name: Enabling secret scanning
