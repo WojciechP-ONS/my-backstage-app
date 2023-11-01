@@ -65,6 +65,14 @@ spec:
         url: https://github.com/ONSdigital/sml-python-method-template
         copyWithoutRender:
           - .github/workflows/*
+
+    - id: template catalog
+      name: Templating caalog
+      action: fetch:template
+      input:
+        url: ./content
+        copyWithoutRender:
+          - .github/workflows/*
         values:
           name: ${{ parameters.name }}
           displayName: ${{ parameters.displayName }}
@@ -83,6 +91,7 @@ spec:
         repoVisibility: 'public'
         defaultBranch: 'main'
         protectDefaultBranch: true	
+        access: backstage-dummy-org/spp-sml
 
     - id: secretScanning
       name: Enabling secret scanning

@@ -72,8 +72,11 @@ import { EntityTeamPullRequestsCard } from '@backstage/plugin-github-pull-reques
 
 import { EntityGithubPullRequestsContent } from '@roadiehq/backstage-plugin-github-pull-requests';
 
-import { EntitySecurityInsightsContent } from '@roadiehq/backstage-plugin-security-insights';
-
+import {
+  EntitySecurityInsightsCard,
+  EntitySecurityInsightsContent,
+  isSecurityInsightsAvailable
+} from '@roadiehq/backstage-plugin-security-insights';
 
 const techdocsContent = (
   <EntityTechdocsContent>
@@ -182,6 +185,16 @@ const overviewContent = (
           </Grid>
         </EntitySwitch.Case>
       </EntitySwitch>
+    </Grid>
+
+    <Grid>
+    <EntitySwitch>
+      <EntitySwitch.Case if={isSecurityInsightsAvailable}>
+        <Grid item md={6}>
+          <EntitySecurityInsightsCard />
+        </Grid>
+      </EntitySwitch.Case>
+    </EntitySwitch>
     </Grid>
 
   </Grid>
