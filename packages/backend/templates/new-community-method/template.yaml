@@ -62,7 +62,7 @@ spec:
       name: Templating method skeleton
       action: fetch:template
       input:
-        url: ./content
+        url: https://github.com/ONSdigital/sml-python-method-template
         copyWithoutRender:
           - .github/workflows/*
         values:
@@ -80,12 +80,9 @@ spec:
           - github.com
         description: ${{ parameters.description }}
         repoUrl: ${{ parameters.repoUrl }}
-
-    - id: branchProtect
-      name: Enabling branch protection and disallowing force pushes to main
-      action: ons:github:createRuleset
-      input:
-        repoUrl: ${{ parameters.repoUrl }}
+        repoVisibility: 'public'
+        defaultBranch: 'main'
+        protectDefaultBranch: true	
 
     - id: secretScanning
       name: Enabling secret scanning

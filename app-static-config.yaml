@@ -71,3 +71,8 @@
   target: ./templates/website-template/template.yaml
   rules:
     - allow: [Template]
+
+- type: file
+  target: ./templates/website-template-copy/template.yaml
+  rules:
+    - allow: [Template]

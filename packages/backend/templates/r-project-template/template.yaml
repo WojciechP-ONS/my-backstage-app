@@ -8,8 +8,6 @@ metadata:
     - r
     - spp
 
-############################################################
-
 spec:
   owner: WojciechPONS
   type: service
@@ -48,30 +46,35 @@ spec:
           ui:options:
             allowedHosts:
               - github.com
-
-############################################################
-
   steps:
-    - action: github:templaterepo:create
-      id: github-templaterepo-create
-      name: Github Template-repo Create
-        input:
-          repoUrl: ${{ parameters.repoUrl}}
-          templateOwner: ${{ parameters.owner}}
-          templateRepo: https://github.com/backstage-dummy-org/Project-Test/tree/master # path to your template repo
+    - action: fetch:template
+      id: fetch-template
+      name: Fetch Template
+      input:
+        targetPath: .
+        url: https://github.com/backstage-dummy-org/Project-Test/tree/master # path to your template repo
+        values:
+          name: ${{ parameters.name }}
+          description: ${{ parameters.description }}
+          destination: ${{ parameters.repoUrl | parseRepoUrl }}
+          owner: ${{ parameters.owner }}
+
     - id: publish
       name: Publish
       action: publish:github
-        input:
-          repoUrl: ${{ parameters.repoUrl}}
-          description: 'this is a template repo'
-          protectDefaultBranch: true  
+      input:
+        allowedHosts: ['github.com']
+        description: This is ${{ parameters.name }}
+        repoUrl: ${{ parameters.repoUrl }}
+        repoVisibility: 'public'
+        defaultBranch: 'main'
+        protectDefaultBranch: true	
 
-    # - id: branchProtect
-    #   name: Enabling branch protection and disallowing force pushes to main
-    #   action: ons:github:createRuleset
-    #   input:
-    #     repoUrl: ${{ parameters.repoUrl }}
+    - id: branchProtect
+      name: Enabling branch protection and disallowing force pushes to main
+      action: ons:github:createRuleset
+      input:
+        repoUrl: ${{ parameters.repoUrl }}
 
     - id: secretScanning
       name: Enabling secret scanning
@@ -79,9 +82,6 @@ spec:
       input:
         repoUrl: ${{ parameters.repoUrl }}
 
-    # Using the "catalog:register" action can result in an orphaned repo when the underlying repo is eventually deleted,
-    # since it has a location independent of the entity providers. Instead, we rely on the providers to discover the entity
-    # (sacrificing the "open in catalog" button).
     - id: refresh
       name: Updating catalog entities
       action: ons:github:runProviders

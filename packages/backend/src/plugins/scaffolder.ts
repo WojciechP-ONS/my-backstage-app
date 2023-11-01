@@ -9,13 +9,12 @@ import { DefaultGithubCredentialsProvider } from '@backstage/integration';
 import { 
   createCreateMkdocsAction, 
   createCreateRulesetAction, 
-  createEnableSecretScanningAction, 
+  createEnableSecretScanningAction,   
   createGetBuildArtifactAction, 
   createRunGithubProvidersAction, 
   createUpdateMkdocsAction 
 } from './scaffolder/githubScaffolderActions';
 
-import { createGithubTemplateRepoCreateAction } from './scaffolder/github_templates/githubTemplateRepoCreate';
 
 export default async function createPlugin(
   env: PluginEnvironment,
@@ -37,7 +36,6 @@ export default async function createPlugin(
   const customActions = [
 
     // GitHub
-    createGithubTemplateRepoCreateAction({integrations, githubCredentialsProvider}),
     createUpdateMkdocsAction({integrations, githubCredentialsProvider}),
     createRunGithubProvidersAction(),
     createCreateMkdocsAction({integrations, githubCredentialsProvider}),
