@@ -50,7 +50,6 @@ import {
 import { AnnouncementsPage } from '@k-phoen/backstage-plugin-announcements';
 
 
-
 const myTheme = createTheme({
   palette: {
     ...lightTheme.palette,
@@ -169,7 +168,9 @@ const app = createApp({
 
 const routes = (
   <FlatRoutes>
-    <Route path="/" element={<Navigate to="catalog" />} />
+    {/* <Route path="/" element={<HomepageCompositionRoot />}>
+      {homePage}
+    </Route> */}
     <Route path="/catalog" element={<CatalogIndexPage />} />
     <Route
       path="/catalog/:namespace/:kind/:name"

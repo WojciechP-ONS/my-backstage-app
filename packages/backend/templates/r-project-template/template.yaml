@@ -7,9 +7,8 @@ metadata:
   tags:
     - r
     - spp
-
 spec:
-  owner: WojciechPONS
+  owner: spp-sml
   type: service
   parameters:
     - title: Name of the project

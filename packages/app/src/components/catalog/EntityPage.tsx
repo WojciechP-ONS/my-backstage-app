@@ -66,7 +66,10 @@ import {
   EntityGithubInsightsReadmeCard,
   EntityGithubInsightsReleasesCard,
   isGithubInsightsAvailable,
+  EntityGithubInsightsEnvironmentsCard,
   } from '@roadiehq/backstage-plugin-github-insights';
+
+
     
 import { EntityTeamPullRequestsCard } from '@backstage/plugin-github-pull-requests-board';
 
@@ -78,6 +81,8 @@ import {
   isSecurityInsightsAvailable
 } from '@roadiehq/backstage-plugin-security-insights';
 
+
+
 const techdocsContent = (
   <EntityTechdocsContent>
     <TechDocsAddons>
@@ -86,16 +91,12 @@ const techdocsContent = (
   </EntityTechdocsContent>
 );
 
-import {
-  EntityCircleCIContent,
-  isCircleCIAvailable,
-} from '@backstage/plugin-circleci';
 
 const cicdContent = (
   // This is an example of how you can implement your company's logic in entity page.
   // You can for example enforce that all components of type 'service' should use GitHubActions
   <EntitySwitch>
-    <EntitySwitch.Case if={isCircleCIAvailable}>
+    <EntitySwitch.Case if={isGithubActionsAvailable}>
       <EntityGithubActionsContent />
     </EntitySwitch.Case>
 
@@ -156,38 +157,23 @@ const overviewContent = (
       <EntityCatalogGraphCard variant="gridItem" height={400} />
     </Grid>
 
-    <Grid item md={4} xs={12}>
-      <EntityLinksCard />
+    {/* <Grid item xs={12} md={4}>
+      <MicrosoftCalendarCard />
+    </Grid> */}
+
+    <Grid item md={6} xs={12}>
+      <EntityLinksCard variant="gridItem" />
     </Grid>
-    <Grid item md={8} xs={12}>
+
+    <Grid item md={6} xs={12}>
       <EntityHasSubcomponentsCard variant="gridItem" />
     </Grid>
 
-    <Grid container spacing={3} alignItems="stretch">
-    <EntitySwitch>
-      <EntitySwitch.Case if={isJiraAvailable}>
-        <Grid item md={6}>
-          <EntityJiraOverviewCard />
-        </Grid>
-      </EntitySwitch.Case>
-    </EntitySwitch>
+    <Grid item md={6} xs={12}>
+      <EntityGithubInsightsLanguagesCard/>
     </Grid>
 
-    <Grid container spacing={3} alignItems="stretch">
-    <EntitySwitch>
-        <EntitySwitch.Case if={e => Boolean(isGithubInsightsAvailable(e))}>
-          <Grid item md={6}>
-            <EntityGithubInsightsLanguagesCard />
-            <EntityGithubInsightsReleasesCard />
-          </Grid>
-          <Grid item md={6}>
-            <EntityGithubInsightsReadmeCard maxHeight={350} />
-          </Grid>
-        </EntitySwitch.Case>
-      </EntitySwitch>
-    </Grid>
 
-    <Grid>
     <EntitySwitch>
       <EntitySwitch.Case if={isSecurityInsightsAvailable}>
         <Grid item md={6}>
@@ -195,7 +181,20 @@ const overviewContent = (
         </Grid>
       </EntitySwitch.Case>
     </EntitySwitch>
-    </Grid>
+
+    <EntitySwitch>
+        <EntitySwitch.Case if={e => Boolean(isGithubInsightsAvailable(e))}>
+          <Grid item md={6}>
+            <EntityGithubInsightsReadmeCard maxHeight={320} />
+          </Grid>
+          <Grid item md={6} xs={12}>
+            <EntityGithubInsightsReleasesCard />
+          </Grid>
+          <Grid item md={6} xs={12}>
+            <EntityGithubInsightsEnvironmentsCard/>
+          </Grid>
+        </EntitySwitch.Case>
+      </EntitySwitch>
 
   </Grid>
 );
@@ -204,6 +203,18 @@ const serviceEntityPage = (
   <EntityLayout>
     <EntityLayout.Route path="/" title="Overview">
       {overviewContent}
+    </EntityLayout.Route>
+
+    <EntityLayout.Route path="/jira" title="Jira">
+    <Grid container spacing={3} alignItems="stretch">
+    <EntitySwitch>
+      <EntitySwitch.Case if={isJiraAvailable}>
+        <Grid item md={12}>
+          <EntityJiraOverviewCard />
+        </Grid>
+      </EntitySwitch.Case>
+    </EntitySwitch>
+    </Grid>    
     </EntityLayout.Route>
 
     <EntityLayout.Route path="/ci-cd" title="CI/CD">

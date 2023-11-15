@@ -5,13 +5,16 @@ app:
 organization:
   name: ONS 
 
+permission:
+  enabled: true
+
 backend:
   # Used for enabling authentication, secret is shared by all backend plugins
   # See https://backstage.io/docs/auth/service-to-service-auth for
   # information on the format
-  # auth:
-  #   keys:
-  #     - secret: ${BACKEND_SECRET}
+  auth:
+    keys:
+      - secret: RqRxCsdjxYQvMAPU8UbzQJL5IfqOl0Bm
   baseUrl: http://localhost:7007
   listen:
     port: 7007
@@ -103,6 +106,12 @@ auth:
       development:
         clientId: 5afea160b3875585c8ef
         clientSecret: 1965ac8d3230870384b3a141645633ced1e9f246
+    microsoft:
+      development:
+        clientId: f90b0745-8673-4f0d-a32d-ea5b4ac2b7e0
+        clientSecret: xKw8Q~y3-eEHLfsy5hUb8g~aPOf~pFSU~z4EgaR2
+        tenantId: 52bd978e-e003-42d9-8854-ce25d8f27b66
+        # domainHint: 52bd978e-e003-42d9-8854-ce25d8f27b66
 
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
