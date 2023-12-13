@@ -1,59 +1,35 @@
-import {
-  BackstageIdentityResponse,
-} from '@backstage/plugin-auth-node';
 import { createRouter } from '@backstage/plugin-permission-backend';
 import {
   AuthorizeResult,
   PolicyDecision,
-  isPermission,
+  isResourcePermission,
 } from '@backstage/plugin-permission-common';
 import {
   PermissionPolicy,
   PolicyQuery,
-} from '@backstage/plugin-permission-node';
-import { Router } from 'express';
+} from '@backstage/plugin-permission-node';import { Router } from 'express';
+import { PluginEnvironment } from '../types';
+import { BackstageIdentityResponse } from '@backstage/plugin-auth-node';
 import {
   catalogConditions,
+  createCatalogConditionalDecision,
 } from '@backstage/plugin-catalog-backend/alpha';
-import {
-  catalogEntityReadPermission,
-} from '@backstage/plugin-catalog-common/alpha';
-import { PluginEnvironment } from '../types';
 
-
-class OnlySMLAccess implements PermissionPolicy {
+class TestPermissionPolicy implements PermissionPolicy {
   async handle(
     request: PolicyQuery,
     user?: BackstageIdentityResponse,
-  ): Promise<PolicyDecision> {
-    console.log('checking request:')
-    if (isPermission(request.permission, catalogEntityReadPermission)) {
-      const isEntityOwner = catalogConditions.isEntityOwner({
-        claims: user?.identity.ownershipEntityRefs || [],
-      });
-
-      // Check if the ownershipEntityRefs contain the specified value
-      const isOwnerAllowed = user?.identity.ownershipEntityRefs?.some(
-        ref => ref === 'group:default/spp-sml'
+   ): Promise<PolicyDecision> {
+    if (isResourcePermission(request.permission, 'catalog-entity')) {
+      return createCatalogConditionalDecision(
+        request.permission,
+        catalogConditions.isEntityOwner({
+          claims: user?.identity.ownershipEntityRefs ?? [],
+        }),
       );
-
-      if (isEntityOwner && isOwnerAllowed) {
-        console.log('Allow:42')
-        return {result: AuthorizeResult.ALLOW};
-      } else {
-        
-        console.log('Deny:46')
-        return {result: AuthorizeResult.DENY };
-      }
-    }
-
-    // Default permission if the condition doesn't match
-    console.log('Deny:55')
-    return {result: AuthorizeResult.DENY };
+    }    return { result: AuthorizeResult.ALLOW };
   }
-  
 }
-
 
 export default async function createPlugin(
   env: PluginEnvironment,
@@ -62,7 +38,7 @@ export default async function createPlugin(
     config: env.config,
     logger: env.logger,
     discovery: env.discovery,
-    policy: new OnlySMLAccess(),
+    policy: new TestPermissionPolicy(),
     identity: env.identity,
   });
 }
