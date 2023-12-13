@@ -205,18 +205,6 @@ const serviceEntityPage = (
       {overviewContent}
     </EntityLayout.Route>
 
-    <EntityLayout.Route path="/jira" title="Jira">
-    <Grid container spacing={3} alignItems="stretch">
-    <EntitySwitch>
-      <EntitySwitch.Case if={isJiraAvailable}>
-        <Grid item md={12}>
-          <EntityJiraOverviewCard />
-        </Grid>
-      </EntitySwitch.Case>
-    </EntitySwitch>
-    </Grid>    
-    </EntityLayout.Route>
-
     <EntityLayout.Route path="/ci-cd" title="CI/CD">
       {cicdContent}
     </EntityLayout.Route>

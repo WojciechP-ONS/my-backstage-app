@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigate, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { apiDocsPlugin, ApiExplorerPage } from '@backstage/plugin-api-docs';
 import {
   CatalogEntityPage,
@@ -31,8 +31,6 @@ import { AlertDisplay, OAuthRequestDialog } from '@backstage/core-components';
 import { createApp } from '@backstage/app-defaults';
 import { AppRouter, FlatRoutes } from '@backstage/core-app-api';
 import { CatalogGraphPage } from '@backstage/plugin-catalog-graph';
-import { RequirePermission } from '@backstage/plugin-permission-react';
-import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/alpha';
 
 import { githubAuthApiRef } from '@backstage/core-plugin-api';
 import { SignInPage } from '@backstage/core-components';
@@ -44,7 +42,6 @@ import {
   createTheme,
   genPageTheme,
   lightTheme,
-  darkTheme,
   shapes,
 } from '@backstage/theme';
 import { AnnouncementsPage } from '@k-phoen/backstage-plugin-announcements';
@@ -166,12 +163,15 @@ const app = createApp({
 })
 
 
+
+
+
 const routes = (
   <FlatRoutes>
     {/* <Route path="/" element={<HomepageCompositionRoot />}>
       {homePage}
     </Route> */}
-    <Route path="/catalog" element={<CatalogIndexPage />} />
+  <Route path="/catalog" element={<CatalogIndexPage />} />
     <Route
       path="/catalog/:namespace/:kind/:name"
       element={<CatalogEntityPage />}
@@ -193,14 +193,7 @@ const routes = (
       path="/tech-radar"
       element={<TechRadarPage width={1500} height={800} />}
     />
-    <Route
-      path="/catalog-import"
-      element={
-        <RequirePermission permission={catalogEntityCreatePermission}>
-          <CatalogImportPage />
-        </RequirePermission>
-      }
-    />
+    <Route path="/catalog-import" element={<CatalogImportPage />}/>
     <Route path="/search" element={<SearchPage />}>
       {searchPage}
     </Route>
@@ -209,6 +202,7 @@ const routes = (
     <Route path="/announcements" element={<AnnouncementsPage />} />
 
   </FlatRoutes>
+
 );
 
 export default app.createRoot(

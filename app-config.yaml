@@ -59,6 +59,7 @@ backend:
 integrations:
   github:
     - host: github.com
+      token: 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
       apps:
         - $include: backstage-app-credentials.yaml
     ### Example for how to add your GitHub Enterprise instance using the API:
@@ -67,15 +68,6 @@ integrations:
     #   token: ${GHE_TOKEN}
 
 proxy:
-  '/circleci/api':
-    target: https://circleci.com/api/v1.1
-    headers:
-      Circle-Token: ${CIRCLECI_AUTH_TOKEN}  ### Example for how to add a proxy endpoint for the frontend.
-  ### A typical reason to do this is to handle HTTPS and CORS for internal services.
-  # endpoints:
-  #   '/test':
-  #     target: 'https://example.com'
-  #     changeOrigin: true
   '/jira/api':
     target: 'https://akira.atlassian.net'
     headers:

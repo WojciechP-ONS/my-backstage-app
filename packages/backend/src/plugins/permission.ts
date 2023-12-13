@@ -1,6 +1,5 @@
 import {
   BackstageIdentityResponse,
-  IdentityClient
 } from '@backstage/plugin-auth-node';
 import { createRouter } from '@backstage/plugin-permission-backend';
 import {
@@ -11,33 +10,50 @@ import {
 import {
   PermissionPolicy,
   PolicyQuery,
-} from '@backstage/plugin-permission-node';import { Router } from 'express';
-import { PluginEnvironment } from '../types';
+} from '@backstage/plugin-permission-node';
+import { Router } from 'express';
 import {
   catalogConditions,
-  createCatalogConditionalDecision,
 } from '@backstage/plugin-catalog-backend/alpha';
 import {
   catalogEntityReadPermission,
 } from '@backstage/plugin-catalog-common/alpha';
+import { PluginEnvironment } from '../types';
 
-class TestPermissionPolicy implements PermissionPolicy {
+
+class OnlySMLAccess implements PermissionPolicy {
   async handle(
     request: PolicyQuery,
     user?: BackstageIdentityResponse,
-   ): Promise<PolicyDecision> {
+  ): Promise<PolicyDecision> {
+    console.log('checking request:')
     if (isPermission(request.permission, catalogEntityReadPermission)) {
-      return createCatalogConditionalDecision(
-        request.permission,
-        catalogConditions.isEntityOwner({
-          claims: user?.identity.ownershipEntityRefs ?? [],
-        }),
+      const isEntityOwner = catalogConditions.isEntityOwner({
+        claims: user?.identity.ownershipEntityRefs || [],
+      });
+
+      // Check if the ownershipEntityRefs contain the specified value
+      const isOwnerAllowed = user?.identity.ownershipEntityRefs?.some(
+        ref => ref === 'group:default/spp-sml'
       );
+
+      if (isEntityOwner && isOwnerAllowed) {
+        console.log('Allow:42')
+        return {result: AuthorizeResult.ALLOW};
+      } else {
+        
+        console.log('Deny:46')
+        return {result: AuthorizeResult.DENY };
+      }
     }
 
-    return { result: AuthorizeResult.ALLOW };
+    // Default permission if the condition doesn't match
+    console.log('Deny:55')
+    return {result: AuthorizeResult.DENY };
   }
+  
 }
+
 
 export default async function createPlugin(
   env: PluginEnvironment,
@@ -46,7 +62,7 @@ export default async function createPlugin(
     config: env.config,
     logger: env.logger,
     discovery: env.discovery,
-    policy: new TestPermissionPolicy(),
+    policy: new OnlySMLAccess(),
     identity: env.identity,
   });
 }

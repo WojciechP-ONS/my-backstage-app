@@ -58,6 +58,7 @@
     "@k-phoen/backstage-plugin-announcements-backend": "^0.2.0",
     "@roadiehq/backstage-plugin-github-insights": "^2.3.21",
     "@roadiehq/backstage-plugin-github-pull-requests": "^2.5.18",
-    "@roadiehq/backstage-plugin-security-insights": "^2.3.9"
+    "@roadiehq/backstage-plugin-security-insights": "^2.3.9",
+    "react-error-boundary": "^4.0.11"
   }
 }
