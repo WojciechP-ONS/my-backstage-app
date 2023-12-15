@@ -27,7 +27,7 @@ import { entityPage } from './components/catalog/EntityPage';
 import { searchPage } from './components/search/SearchPage';
 import { Root } from './components/Root';
 
-import { AlertDisplay, OAuthRequestDialog } from '@backstage/core-components';
+import { AlertDisplay, OAuthRequestDialog, WarningPanel } from '@backstage/core-components';
 import { createApp } from '@backstage/app-defaults';
 import { AppRouter, FlatRoutes } from '@backstage/core-app-api';
 import { CatalogGraphPage } from '@backstage/plugin-catalog-graph';
@@ -45,6 +45,9 @@ import {
   shapes,
 } from '@backstage/theme';
 import { AnnouncementsPage } from '@k-phoen/backstage-plugin-announcements';
+import { catalogEntityReadPermission } from '@backstage/plugin-catalog-common/alpha'
+import { usePermission } from '@backstage/plugin-permission-react';
+
 
 
 const myTheme = createTheme({
@@ -164,14 +167,12 @@ const app = createApp({
 
 
 
-
-
 const routes = (
   <FlatRoutes>
     {/* <Route path="/" element={<HomepageCompositionRoot />}>
       {homePage}
     </Route> */}
-  <Route path="/catalog" element={<CatalogIndexPage />} />
+     <Route path="/catalog" element={<CatalogIndexPage />} />
     <Route
       path="/catalog/:namespace/:kind/:name"
       element={<CatalogEntityPage />}
@@ -205,12 +206,29 @@ const routes = (
 
 );
 
+function CheckPermission(_props:any) {
+    
+  const { loading: loadingPermission, allowed: readAllowed } = usePermission({permission: catalogEntityReadPermission, resourceRef: 'packages/backend/src/plugins/permission.ts',});
+  
+  let displayContent = <><AppRouter><Root>{routes}</Root></AppRouter></>;
+  
+  
+  if (!loadingPermission && !readAllowed) {
+       displayContent = <WarningPanel title= "Permission Denied"/>
+  }
+  return displayContent;
+}
+
+
 export default app.createRoot(
   <>
     <AlertDisplay />
     <OAuthRequestDialog />
-    <AppRouter>
-      <Root>{routes}</Root>
-    </AppRouter>
+    <CheckPermission>
+      <AppRouter>
+        <Root>{routes}</Root>
+      </AppRouter>
+    </CheckPermission>
+
   </>,
 );

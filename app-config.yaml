@@ -59,7 +59,7 @@ backend:
 integrations:
   github:
     - host: github.com
-      token: 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
+      token: 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
       apps:
         - $include: backstage-app-credentials.yaml
     ### Example for how to add your GitHub Enterprise instance using the API:
