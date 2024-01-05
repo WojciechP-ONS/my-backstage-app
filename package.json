@@ -54,7 +54,9 @@
   },
   "dependencies": {
     "@backstage/plugin-circleci": "^0.3.25",
+    "@backstage/plugin-git-release-manager": "^0.3.40",
     "@backstage/theme": "^0.4.3",
+    "@drodil/backstage-plugin-toolbox": "^1.14.0",
     "@k-phoen/backstage-plugin-announcements-backend": "^0.2.0",
     "@roadiehq/backstage-plugin-github-insights": "^2.3.21",
     "@roadiehq/backstage-plugin-github-pull-requests": "^2.5.18",

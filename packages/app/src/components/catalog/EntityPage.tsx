@@ -58,7 +58,6 @@ import {
 import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
 import { ReportIssue } from '@backstage/plugin-techdocs-module-addons-contrib';
 
-import { EntityJiraOverviewCard, isJiraAvailable } from '@roadiehq/backstage-plugin-jira';
 
 import {
   EntityGithubInsightsContent,
@@ -81,6 +80,12 @@ import {
   isSecurityInsightsAvailable
 } from '@roadiehq/backstage-plugin-security-insights';
 
+import { MicrosoftCalendarCard } from '@backstage/plugin-microsoft-calendar';
+
+import { EntityJiraDashboardContent, isJiraDashboardAvailable } from '@axis-backstage/plugin-jira-dashboard';
+
+import { EntityJiraOverviewCard, isJiraAvailable } from '@roadiehq/backstage-plugin-jira';
+import { GitReleaseManagerPage } from '@backstage/plugin-git-release-manager';
 
 
 const techdocsContent = (
@@ -156,9 +161,19 @@ const overviewContent = (
     <Grid item md={6} xs={12}>
       <EntityCatalogGraphCard variant="gridItem" height={400} />
     </Grid>
-
-    {/* <Grid item xs={12} md={4}>
+{/* 
+    <Grid item xs={12} md={4}>
       <MicrosoftCalendarCard />
+    </Grid> */}
+{/* 
+    <Grid container spacing={3} alignItems="stretch">
+    <EntitySwitch>
+      <EntitySwitch.Case if={isJiraAvailable}>
+        <Grid item md={6}>
+          <EntityJiraOverviewCard />
+        </Grid>
+      </EntitySwitch.Case>
+    </EntitySwitch>
     </Grid> */}
 
     <Grid item md={6} xs={12}>
@@ -171,6 +186,10 @@ const overviewContent = (
 
     <Grid item md={6} xs={12}>
       <EntityGithubInsightsLanguagesCard/>
+    </Grid>
+
+    <Grid>
+      <GitReleaseManagerPage />
     </Grid>
 
 
@@ -204,6 +223,14 @@ const serviceEntityPage = (
     <EntityLayout.Route path="/" title="Overview">
       {overviewContent}
     </EntityLayout.Route>
+
+    <EntityLayout.Route
+    if={isJiraDashboardAvailable}
+    path="/jira-dashboard"
+    title="Jira Dashboard"
+  >
+    <EntityJiraDashboardContent />
+  </EntityLayout.Route>
 
     <EntityLayout.Route path="/ci-cd" title="CI/CD">
       {cicdContent}

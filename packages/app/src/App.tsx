@@ -47,7 +47,9 @@ import {
 import { AnnouncementsPage } from '@k-phoen/backstage-plugin-announcements';
 import { catalogEntityReadPermission } from '@backstage/plugin-catalog-common/alpha'
 import { usePermission } from '@backstage/plugin-permission-react';
-
+import { HomepageCompositionRoot } from '@backstage/plugin-home';
+import { homePage } from './components/home/HomePage';
+import { ToolboxPage } from '@drodil/backstage-plugin-toolbox';
 
 
 const myTheme = createTheme({
@@ -169,9 +171,9 @@ const app = createApp({
 
 const routes = (
   <FlatRoutes>
-    {/* <Route path="/" element={<HomepageCompositionRoot />}>
+    <Route path="/" element={<HomepageCompositionRoot />}>
       {homePage}
-    </Route> */}
+    </Route>
      <Route path="/catalog" element={<CatalogIndexPage />} />
     <Route
       path="/catalog/:namespace/:kind/:name"
@@ -201,6 +203,8 @@ const routes = (
     <Route path="/settings" element={<UserSettingsPage />} />
     <Route path="/catalog-graph" element={<CatalogGraphPage />} />
     <Route path="/announcements" element={<AnnouncementsPage />} />
+    <Route path="/toolbox" element={<ToolboxPage />} />
+
 
   </FlatRoutes>
 
@@ -214,7 +218,7 @@ function CheckPermission(_props:any) {
   
   
   if (!loadingPermission && !readAllowed) {
-       displayContent = <WarningPanel title= "Permission Denied"/>
+       displayContent = <WarningPanel title= "Permission Denied" message= 'You are not authorised to use this platform. For further quenstions and queries about the backstage access contact: ............'/>
   }
   return displayContent;
 }
@@ -229,6 +233,5 @@ export default app.createRoot(
         <Root>{routes}</Root>
       </AppRouter>
     </CheckPermission>
-
   </>,
 );

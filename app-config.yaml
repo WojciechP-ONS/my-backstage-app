@@ -59,7 +59,7 @@ backend:
 integrations:
   github:
     - host: github.com
-      token: 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
+      # token: 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-nononono
       apps:
         - $include: backstage-app-credentials.yaml
     ### Example for how to add your GitHub Enterprise instance using the API:
@@ -93,16 +93,17 @@ techdocs:
 auth:
   # see https://backstage.io/docs/auth/ to learn about auth providers
   environment: development
-  providers:
+  providers:    
+    # microsoft:
+    #   development:
+    #     clientId: f90b0745-8673-4f0d-a32d-ea5b4ac2b7e0
+    #     clientSecret: xKw8Q~y3-eEHLfsy5hUb8g~aPOf~pFSU~z4EgaR2
+    #     tenantId: 52bd978e-e003-42d9-8854-ce25d8f27b66
     github:
       development:
-        clientId: 5afea160b3875585c8ef
-        clientSecret: 1965ac8d3230870384b3a141645633ced1e9f246
-    microsoft:
-      development:
-        clientId: f90b0745-8673-4f0d-a32d-ea5b4ac2b7e0
-        clientSecret: xKw8Q~y3-eEHLfsy5hUb8g~aPOf~pFSU~z4EgaR2
-        tenantId: 52bd978e-e003-42d9-8854-ce25d8f27b66
+        # clientId: 5afea160b3875585c8ef
+        # clientSecret: 1965ac8d3230870384b3a141645633ced1e9f246
+
         # domainHint: 52bd978e-e003-42d9-8854-ce25d8f27b66
 
 scaffolder:
@@ -112,7 +113,7 @@ catalog:
   providers:
     github:
       providerId:
-        organization: 'backstage-dummy-org'
+        organization: 'ONS-innovation'
         schedule: # optional; same options as in TaskScheduleDefinition
           # supports cron, ISO duration, "human duration" as used in code
           frequency: { minutes: 1 }

@@ -16,7 +16,7 @@ import {
   catalogConditions,
 } from '@backstage/plugin-catalog-backend/alpha';
 import {
-  catalogEntityReadPermission,
+  catalogEntityReadPermission, catalogEntityCreatePermission, catalogEntityDeletePermission
 } from '@backstage/plugin-catalog-common/alpha';
 import { PluginEnvironment } from '../types';
 
@@ -27,7 +27,7 @@ class OnlySMLAccess implements PermissionPolicy {
     user?: BackstageIdentityResponse,
   ): Promise<PolicyDecision> {
     console.log('checking request:')
-    if (isPermission(request.permission, catalogEntityReadPermission)) {
+    if (isPermission(request.permission, catalogEntityReadPermission,),(request.permission, catalogEntityCreatePermission),(request.permission, catalogEntityDeletePermission)) {
       const isEntityOwner = catalogConditions.isEntityOwner({
         claims: user?.identity.ownershipEntityRefs || [],
       });
@@ -38,6 +38,7 @@ class OnlySMLAccess implements PermissionPolicy {
       );
 
       if (isEntityOwner && isOwnerAllowed) {
+
         console.log('Allow:42')
         return {result: AuthorizeResult.ALLOW};
       } else {

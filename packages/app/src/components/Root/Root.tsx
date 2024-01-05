@@ -25,9 +25,12 @@ import {
 } from '@backstage/core-components';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import InternalToolIcon from '/Users/wojckechprzybylski/my-backstage-app/packages/app/src/Announcement.icon.svg';
+import AnnouncmentIcon from '/Users/wojckechprzybylski/my-backstage-app/packages/app/src/Announcement.icon.svg';
+import CatalogIcon from '/Users/wojckechprzybylski/my-backstage-app/packages/app/src/catalog.icon.svg';
 import MyCustomLogoFull from '/Users/wojckechprzybylski/my-backstage-app/packages/app/src/logo.png';
 import MyCustomLogoIcon from '/Users/wojckechprzybylski/my-backstage-app/packages/app/src/logoIcon.png';
+import BuildIcon from '@material-ui/icons/Build';
+
 
 const LogoFull = () => {
   return <img src={MyCustomLogoFull} />;
@@ -78,15 +81,18 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
       <SidebarDivider />
       <SidebarGroup label="Menu" icon={<MenuIcon />}>
         {/* Global nav, not org-specific */}
-        <SidebarItem icon={HomeIcon} to="catalog" text="Home" />
+        <SidebarItem icon={HomeIcon} to="/" text="Home" />
+        <SidebarItem icon={CatalogIcon} to="catalog" text="Catalog" />
         <SidebarItem icon={ExtensionIcon} to="api-docs" text="APIs" />
         <SidebarItem icon={LibraryBooks} to="docs" text="Docs" />
         <SidebarItem icon={CreateComponentIcon} to="create" text="Create..." />
-        <SidebarItem icon={InternalToolIcon} to="announcements" text="Announcements" />
+        <SidebarItem icon={AnnouncmentIcon} to="announcements" text="Announcements" />
         {/* End global nav */}
         <SidebarDivider />
         <SidebarScrollWrapper>
           <SidebarItem icon={MapIcon} to="tech-radar" text="Tech Radar" />
+          {/* <SidebarItem icon={BuildIcon} to="toolbox" text="ToolBox" /> */}
+
         </SidebarScrollWrapper>
       </SidebarGroup>
       <SidebarSpace />
